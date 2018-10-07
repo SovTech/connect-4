@@ -1,0 +1,28 @@
+subscription {
+    Game(filter: {
+        mutation_in: [UPDATED]
+        updatedFields_contains: "placesRemaining"
+    }) {
+        node {
+            id
+            placesRemaining
+            createdAt
+            status
+            createdBy {
+                id
+                firstName
+                slackUserId
+            }
+            yellowPlayer {
+                id
+                firstName
+                slackUserId
+            }
+            redPlayer {
+                id
+                firstName
+                slackUserId
+            }
+        }
+    }
+}

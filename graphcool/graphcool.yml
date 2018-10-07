@@ -1,0 +1,75 @@
+# This file is the main config file for your Graphcool Service.
+
+# In the types.graphql you define your data schema
+types: ./types.graphql
+
+
+functions:
+  # Resolvers
+  slackLogin:
+    type: resolver
+    handler:
+      code: src/slackLogin/index.ts
+    schema: src/slackLogin/index.graphql
+  joinGame:
+    type: resolver
+    handler:
+      code: src/joinGame/index.ts
+    schema: src/joinGame/index.graphql
+  setRoomStatus:
+    type: resolver
+    handler:
+      code: src/setRoomStatus/index.ts
+    schema: src/setRoomStatus/index.graphql
+
+  # Subscriptions
+  gameCreatedNotification:
+    type: subscription
+    handler:
+      code: src/gameCreatedNotification/index.ts
+    query: src/gameCreatedNotification/index.graphql
+  gameUpdatedNotification:
+    type: subscription
+    handler:
+      code: src/gameUpdatedNotification/index.ts
+    query: src/gameUpdatedNotification/index.graphql
+
+# Model/Relation permissions are used to limit the API access
+# To take the burden of thinking about those while development, we
+# preconfigured the wildcard ("*") permission that allows everything
+# Read more here:
+# https://www.graph.cool/docs/reference/auth/authorization/overview-iegoo0heez
+permissions:
+  # Types
+  - operation: User.create
+    authenticated: true
+  - operation: User.read
+    authenticated: true
+  - operation: Game.create
+    authenticated: true
+  - operation: Game.read
+    authenticated: true
+  - operation: Game.update
+    authenticated: true
+  - operation: RoomStatusEntry.create
+    authenticated: true
+  - operation: RoomStatusEntry.read
+    authenticated: true
+
+  # Relations
+  - operation: YellowUser.connect
+    authenticated: true
+  - operation: RedUser.connect
+    authenticated: true
+  - operation: RoomStatusLogger.connect
+    authenticated: true
+  - operation: GameCreator.connect
+    authenticated: true
+
+
+# Your root tokens used for functions to get full access to the API
+# Read more here:
+# https://www.graph.cool/docs/reference/auth/authentication/authentication-tokens-eip7ahqu5o
+# rootTokens:
+#   - mytoken
+

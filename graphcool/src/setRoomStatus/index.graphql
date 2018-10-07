@@ -1,0 +1,8 @@
+type setRoomStatusPayload {
+    id: ID!
+    status: String!
+}
+
+extend type Mutation {
+    setRoomStatus(status: String!): setRoomStatusPayload!
+}

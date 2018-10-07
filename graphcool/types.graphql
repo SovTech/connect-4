@@ -1,0 +1,82 @@
+# Connect 4 Schema
+#
+# Model fields are ordered as follows:
+# system
+# scalar required
+# scalar none-required
+# one-to-one
+# one-to-many
+# many-to-many
+# enums
+
+type User @model {
+    id: ID! @isUnique
+    updatedAt: DateTime!
+    createdAt: DateTime!
+
+    firstName: String!
+    lastName: String!
+    email: String! @isUnique
+    slackUserId: String @isUnique
+    avatarUrl: String
+
+    gamesCreated: [Game!]! @relation(name: "GameCreator")
+    gamesCancelled: [Game!]! @relation(name: "GameCanceller")
+    yellowPlayerGames: [Game!]! @relation(name: "YellowUser")
+    redPlayerGames: [Game!]! @relation(name: "RedUser")
+    roomStatusEntries: [RoomStatusEntry!]! @relation(name: "RoomStatusLogger")
+}
+
+type File @model {
+    contentType: String!
+    createdAt: DateTime!
+    id: ID! @isUnique
+    name: String!
+    secret: String! @isUnique
+    size: Int!
+    updatedAt: DateTime!
+    url: String! @isUnique
+}
+
+type Game @model {
+    id: ID! @isUnique
+    updatedAt: DateTime!
+    createdAt: DateTime!
+
+    placesRemaining: Int! @defaultValue(value: 1) @migrationValue(value: 0)
+
+    createdBy: User! @relation(name: "GameCreator")
+    cancelledBy: User @relation(name: "GameCanceller")
+    yellowPlayer: User @relation(name: "YellowUser")
+    redPlayer: User @relation(name: "RedUser")
+
+    status: GameStatus! @defaultValue(value: NOT_STARTED)
+    winner: SideColor
+}
+
+enum GameStatus {
+    NOT_STARTED,
+    IN_PROGRESS,
+    FINISHED,
+    CANCELLED
+}
+
+enum SideColor {
+    YELLOW,
+    RED
+}
+
+type RoomStatusEntry @model {
+    id: ID! @isUnique
+    updatedAt: DateTime!
+    createdAt: DateTime!
+
+    status: RoomStatus!
+
+    createdBy: User! @relation(name: "RoomStatusLogger")
+}
+
+enum RoomStatus {
+    FREE,
+    BUSY
+}

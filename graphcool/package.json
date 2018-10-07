@@ -1,0 +1,16 @@
+{
+  "name": "graphcool",
+  "version": "1.0.0",
+  "description": "My Graphcool Service",
+  "dependencies": {
+    "@types/isomorphic-fetch": "^0.0.34",
+    "form-data": "^2.3.1",
+    "graphcool-lib": "^0.1.4",
+    "graphql-request": "^1.4.1",
+    "isomorphic-fetch": "^2.2.1",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.44"
+  }
+}

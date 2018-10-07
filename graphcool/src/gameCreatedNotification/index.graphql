@@ -1,0 +1,16 @@
+subscription {
+    Game(filter: {
+        mutation_in: [CREATED]
+    }) {
+        node {
+            id
+            createdAt
+            status
+            createdBy {
+                id
+                firstName
+                slackUserId
+            }
+        }
+    }
+}

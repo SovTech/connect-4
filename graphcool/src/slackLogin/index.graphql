@@ -1,0 +1,11 @@
+type SlackLoginPayload {
+    id: ID!
+    token: String!
+    firstName: String!
+    lastName: String!
+    email: String!
+}
+
+extend type Mutation {
+    slackLogin(slackToken: String!): SlackLoginPayload!
+}
