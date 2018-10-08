@@ -53,3 +53,12 @@ export const SET_GAME_WINNER = gql`
     }
   }
 `;
+
+export const INSERT_PIECE = gql`
+  mutation insertPiece($gameId: ID!, $column: Int!) {
+    insertPiece(gameId: $gameId, column: $column) {
+      id
+      grid
+    }
+  }
+`;

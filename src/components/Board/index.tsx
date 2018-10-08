@@ -4,34 +4,31 @@ import { Cell } from '../index';
 import { BoardWrapper, Column } from './styles';
 
 type Props = {
-  board: any;
-  addPiece: Function;
+  gameId: string;
+  isActive: boolean;
+  grid: any[];
 }
 
 export default class Board extends React.Component<Props> {
   render() {
-    // Shortcut to props board
-    let board = this.props.board;
+    const {isActive, gameId, grid} = this.props;
 
-    // Grid CSS classes
-    let boardClasses = classNames({
-      'connect4-board--active': board.isActive,
-      'connect4-board--inactive': !board.isActive
+    const boardClasses = classNames({
+      'connect4-board--active': isActive,
+      'connect4-board--inactive': !isActive
     });
 
-    // Array of cells
-    let cells = board.grid.map((column: any[], y: number) => {
+    const cells = grid.map((column: any[], y: number) => {
       return (
         <Column key={`column-${y}`}>
           {column.map((cell, x) => {
             return (
               <Cell
+                gameId={gameId}
                 key={`cell-${x}-${y}`}
                 x={x}
                 y={y}
                 cell={cell.toString()}
-                nextPlayer={board.nextPlayer}
-                addPiece={this.props.addPiece}
               />
             );
 

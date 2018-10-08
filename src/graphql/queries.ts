@@ -11,6 +11,9 @@ export const ALL_GAMES = gql`
       createdAt
       status
       winner
+      grid
+      inserts
+      nextPlayer
       yellowPlayer {
         id
         avatarUrl

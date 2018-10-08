@@ -90,7 +90,6 @@ export default class Board {
    */
   didSomebodyWin() {
     return matches(this.grid);
-
   }
 }
 
