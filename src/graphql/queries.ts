@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import Query from 'react-apollo/Query';
 
 export const ALL_GAMES = gql`
-  query {
+  query allGames {
     allGames(
       orderBy: createdAt_DESC
       first: 5
@@ -36,7 +36,7 @@ export class AllGamesQuery extends Query<{ allGames: Array<Game>; }, {}> {
 }
 
 export const ALL_USERS = gql`
-  query {
+  query allUsers {
     allUsers {
       id
       email

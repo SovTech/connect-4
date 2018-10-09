@@ -40,7 +40,7 @@ export default async (event: FunctionEvent<EventData>) => {
       const updatedGrid = addPiece(game.Game.grid, column, 'RED');
 
       return await updateGame(api, gameId, updatedGrid).then(async game => {
-        return {data: game.Game};
+        return {data: {id: gameId, grid: updatedGrid}};
       });
     });
   } catch (e) {
@@ -75,7 +75,7 @@ async function getGame(api: GraphQLClient, gameId: string): Promise<any> {
   return api.request<{ getGame: any }>(getGameQuery, queryVariables);
 }
 
-async function updateGame(api: GraphQLClient, gameId: string, grid: any[]): Promise<any> {
+async function updateGame(api: GraphQLClient, gameId: string, grid: string): Promise<any> {
   const queryVariables = {
     gameId,
     grid
@@ -97,7 +97,7 @@ async function updateGame(api: GraphQLClient, gameId: string, grid: any[]): Prom
 }
 
 
-function addPiece(grid: any[], columnIndex: number, piece: string) {
+function addPiece(grid: any, columnIndex: number, piece: string) {
   const column = grid[columnIndex];
   let cellIndex = -1;
 
@@ -119,5 +119,5 @@ function addPiece(grid: any[], columnIndex: number, piece: string) {
     //   this.isActive = false;
     // }
   }
-  return JSON.stringify(grid);
+  return grid;
 }
