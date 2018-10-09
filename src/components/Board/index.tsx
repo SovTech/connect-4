@@ -6,7 +6,7 @@ import { BoardWrapper, Column } from './styles';
 type Props = {
   gameId: string;
   isActive: boolean;
-  grid: any[];
+  grid: string;
 }
 
 export default class Board extends React.Component<Props> {
@@ -18,7 +18,7 @@ export default class Board extends React.Component<Props> {
       'connect4-board--inactive': !isActive
     });
 
-    const cells = grid.map((column: any[], y: number) => {
+    const cells = JSON.parse(grid).map((column: any[], y: number) => {
       return (
         <Column key={`column-${y}`}>
           {column.map((cell, x) => {

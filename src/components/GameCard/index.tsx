@@ -13,7 +13,7 @@ import { CardInner, ColorText, PlayerDiv, PlayersDiv, TeamDiv, TeamsContainer } 
 
 interface GameCardProps extends Game {
   style?: React.CSSProperties;
-  grid: any[];
+  grid: any;
 }
 
 export default class GameCard extends React.Component<GameCardProps> {

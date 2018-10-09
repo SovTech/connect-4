@@ -2,7 +2,7 @@ interface Game {
   id: string;
   status: GameStatus;
   createdAt: string;
-  grid: any[];
+  grid: any;
   nextPlayer: 'RED' | 'YELLOW' | null;
   winner: 'RED' | 'YELLOW' | null;
   yellowPlayer: User | null;

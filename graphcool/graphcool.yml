@@ -16,7 +16,7 @@ functions:
     handler:
       code: src/resolvers/joinGame/index.ts
     schema: src/resolvers/joinGame/index.graphql
-  insertPiece2:
+  insertPiece:
     type: resolver
     handler:
       code: src/resolvers/insertPiece/index.ts
