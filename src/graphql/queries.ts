@@ -69,6 +69,7 @@ export const SINGLE_GAME = gql`
       createdAt
       status
       winner
+      nextPlayer
       yellowPlayer {
         id
         avatarUrl

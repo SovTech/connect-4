@@ -6,11 +6,12 @@ import { AvatarInner, AvatarWrapper } from './styles';
 type Props = {
   imageUrl: string | null;
   size: 30 | 40 | 50 | 80;
+  activeColor?: 'RED' | 'YELLOW' | undefined;
 }
 
 const Avatar = (props: Props) => {
   return (
-    <AvatarWrapper size={props.size}>
+    <AvatarWrapper size={props.size} className={props.activeColor}>
       {props.imageUrl
         ? <AvatarInner
           size={props.size}
