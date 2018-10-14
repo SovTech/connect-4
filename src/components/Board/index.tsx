@@ -24,6 +24,7 @@ export default class Board extends React.Component<Props> {
           {column.map((cell, x) => {
             return (
               <Cell
+                isActive={isActive}
                 gameId={gameId}
                 key={`cell-${x}-${y}`}
                 x={x}
