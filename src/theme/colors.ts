@@ -1,4 +1,4 @@
-import { darken, desaturate, lighten, rgba } from 'polished';
+import { darken, lighten, rgba } from 'polished';
 import { pickRandomProperty } from '../utils';
 
 // Flat UI colors
@@ -39,7 +39,7 @@ export const warning = flatUIColors.yellow2;
 export const error = flatUIColors.red1;
 
 // Application Usage
-export const disabledColorLight = desaturate(0.40, lighten(0.48, baseColor));
+export const disabledColorLight = lighten(0.4, baseColor);
 export const disabledColor = baseColorDarker10;
 export const disabledOpacity = 0.7;
 export const overlayColor = rgba('#000000', 0.05);
