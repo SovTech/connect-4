@@ -1,22 +1,14 @@
-import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import Header from './index';
-import { mock } from '../../testing/graphql';
+import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
-import { LATEST_ROOM_STATUS } from '../../graphql/queries';
 import StoryRouter from 'storybook-react-router';
-
-mock.expect(LATEST_ROOM_STATUS);
+import { mock } from '../../testing/graphql';
+import Header from './index';
 
 storiesOf('Header', module)
   .addDecorator(StoryRouter())
-  .add('Room free', () => (
+  .add('Header', () => (
     <ApolloProvider client={mock.client as any}>
-      <Header/>
-    </ApolloProvider>
-  ))
-  .add('Room booked', () => (
-    <ApolloProvider client={mock.client as any}>
-      <Header/>
+      <Header />
     </ApolloProvider>
   ));

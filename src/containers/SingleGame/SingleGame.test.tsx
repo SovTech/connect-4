@@ -1,11 +1,11 @@
 import * as React from 'react';
-import SingleGame from './index';
-import { mock } from '../../testing/graphql';
 import { ApolloProvider } from 'react-apollo';
-import * as renderer from 'react-test-renderer';
-import { LATEST_ROOM_STATUS, SINGLE_GAME } from '../../graphql/queries';
 import { MemoryRouter } from 'react-router-dom';
+import * as renderer from 'react-test-renderer';
 import { FINISHED_GAME } from '../../constants/dummy_content';
+import { SINGLE_GAME } from '../../graphql/queries';
+import { mock } from '../../testing/graphql';
+import SingleGame from './index';
 
 const App = () => (
   <ApolloProvider client={mock.client as any}>
@@ -22,7 +22,6 @@ describe('SingleGame', () => {
   beforeEach(() => mock.reset());
 
   it('renders the SingleGame', () => {
-    mock.expect(LATEST_ROOM_STATUS);
     mock.expect(SINGLE_GAME).reply({
       Game: FINISHED_GAME
     });
@@ -32,7 +31,6 @@ describe('SingleGame', () => {
   });
 
   it('renders loading state', () => {
-    mock.expect(LATEST_ROOM_STATUS);
     mock.expect(SINGLE_GAME).loading(true);
 
     const tree = renderer.create(App()).toJSON();
@@ -40,7 +38,6 @@ describe('SingleGame', () => {
   });
 
   it('renders errors when API fails', () => {
-    mock.expect(LATEST_ROOM_STATUS);
     mock.expect(SINGLE_GAME).fail('everything is terrible');
 
     const tree = renderer.create(App()).toJSON();

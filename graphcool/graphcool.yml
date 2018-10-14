@@ -9,62 +9,60 @@ functions:
   slackLogin:
     type: resolver
     handler:
-      code: src/slackLogin/index.ts
-    schema: src/slackLogin/index.graphql
+      code: src/resolvers/slackLogin/index.ts
+    schema: src/resolvers/slackLogin/index.graphql
   joinGame:
     type: resolver
     handler:
-      code: src/joinGame/index.ts
-    schema: src/joinGame/index.graphql
-  setRoomStatus:
+      code: src/resolvers/joinGame/index.ts
+    schema: src/resolvers/joinGame/index.graphql
+  insertPiece:
     type: resolver
     handler:
-      code: src/setRoomStatus/index.ts
-    schema: src/setRoomStatus/index.graphql
+      code: src/resolvers/insertPiece/index.ts
+    schema: src/resolvers/insertPiece/index.graphql
 
   # Subscriptions
   gameCreatedNotification:
     type: subscription
     handler:
-      code: src/gameCreatedNotification/index.ts
-    query: src/gameCreatedNotification/index.graphql
+      code: src/subscriptions/gameCreatedNotification/index.ts
+    query: src/subscriptions/gameCreatedNotification/index.graphql
   gameUpdatedNotification:
     type: subscription
     handler:
-      code: src/gameUpdatedNotification/index.ts
-    query: src/gameUpdatedNotification/index.graphql
+      code: src/subscriptions/gameUpdatedNotification/index.ts
+    query: src/subscriptions/gameUpdatedNotification/index.graphql
 
 # Model/Relation permissions are used to limit the API access
-# To take the burden of thinking about those while development, we
-# preconfigured the wildcard ("*") permission that allows everything
 # Read more here:
 # https://www.graph.cool/docs/reference/auth/authorization/overview-iegoo0heez
 permissions:
-  # Types
-  - operation: User.create
-    authenticated: true
-  - operation: User.read
-    authenticated: true
-  - operation: Game.create
-    authenticated: true
-  - operation: Game.read
-    authenticated: true
-  - operation: Game.update
-    authenticated: true
-  - operation: RoomStatusEntry.create
-    authenticated: true
-  - operation: RoomStatusEntry.read
-    authenticated: true
+# Types
+- operation: User.create
+  authenticated: true
+- operation: User.read
+  authenticated: true
+- operation: Game.create
+  authenticated: true
+- operation: Game.read
+  authenticated: true
+- operation: Game.update
+  authenticated: true
+- operation: RoomStatusEntry.create
+  authenticated: true
+- operation: RoomStatusEntry.read
+  authenticated: true
 
-  # Relations
-  - operation: YellowUser.connect
-    authenticated: true
-  - operation: RedUser.connect
-    authenticated: true
-  - operation: RoomStatusLogger.connect
-    authenticated: true
-  - operation: GameCreator.connect
-    authenticated: true
+# Relations
+- operation: YellowUser.connect
+  authenticated: true
+- operation: RedUser.connect
+  authenticated: true
+- operation: RoomStatusLogger.connect
+  authenticated: true
+- operation: GameCreator.connect
+  authenticated: true
 
 
 # Your root tokens used for functions to get full access to the API
