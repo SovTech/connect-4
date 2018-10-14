@@ -1,5 +1,5 @@
-import theme from '../../theme';
 import styled from 'styled-components';
+import theme from '../../theme';
 
 export const PlayerDiv = styled.div`
     display: flex;
@@ -8,14 +8,6 @@ export const PlayerDiv = styled.div`
     align-items: center;
     justify-content: center;
     font-size: ${theme.smallFontSize};
-`;
-
-export const PlayersDiv = styled.div`
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
 `;
 
 export const CardInner = styled.div`

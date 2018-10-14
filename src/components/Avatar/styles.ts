@@ -1,5 +1,5 @@
-import theme from '../../theme';
 import styled from 'styled-components';
+import theme from '../../theme';
 
 type WrapperProps = {
   size: 30 | 40 | 50 | 80;
@@ -18,6 +18,14 @@ export const AvatarWrapper = styled<WrapperProps, 'div'>('div')`
   align-items: center;
   width: ${props => props.size}px;
   height: ${props => props.size}px;
+  
+    &.yellow-active {
+      border: thick solid ${theme.warning};
+    }
+    
+    &.red-active {
+      border: thick solid ${theme.error};
+    }
 `;
 
 export const AvatarInner = styled<InnerProps, 'div'>('div')`
