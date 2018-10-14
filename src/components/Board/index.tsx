@@ -18,7 +18,6 @@ export default class Board extends React.Component<Props> {
       'connect4-board--inactive': !isActive
     });
 
-
     const cells = grid.map((column: any[], y: number) => {
       return (
         <Column key={`column-${y}`}>

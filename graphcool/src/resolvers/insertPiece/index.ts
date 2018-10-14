@@ -1,5 +1,7 @@
 import { fromEvent, FunctionEvent } from 'graphcool-lib';
 import { GraphQLClient } from 'graphql-request';
+import { addPiece } from '../../utils/connect4/board';
+import { didSomeoneWin } from '../../utils/connect4/matches';
 
 interface EventData {
   gameId: string;
@@ -37,10 +39,21 @@ export default async (event: FunctionEvent<EventData>) => {
 
     return await getGame(api, gameId).then(async game => {
 
-      const updatedGrid = addPiece(game.Game.grid, column, 'RED');
+      let selectedColor;
 
-      return await updateGame(api, gameId, updatedGrid).then(async game => {
-        return {data: {id: gameId, grid: updatedGrid}};
+      if (game.Game.redPlayer && game.Game.redPlayer.id === playerId) {
+        selectedColor = 'RED';
+      } else if (game.Game.yellowPlayer && game.Game.yellowPlayer.id === playerId) {
+        selectedColor = 'YELLOW';
+      } else {
+        return {error: 'Player is not in this game'};
+      }
+
+      const updatedGrid = addPiece(game.Game.grid, column, selectedColor);
+      const status = didSomeoneWin(updatedGrid) ? 'FINISHED' : 'IN_PROGRESS';
+
+      return await updateGame(api, gameId, updatedGrid, status).then(async game => {
+        return {data: {id: gameId, grid: updatedGrid, status: game.updateGame.status}};
       });
     });
   } catch (e) {
@@ -68,6 +81,12 @@ async function getGame(api: GraphQLClient, gameId: string): Promise<any> {
         id
         inserts
         grid
+        redPlayer {
+          id
+        }
+        yellowPlayer {
+          id
+        }
       }
     }
   `;
@@ -75,49 +94,26 @@ async function getGame(api: GraphQLClient, gameId: string): Promise<any> {
   return api.request<{ getGame: any }>(getGameQuery, queryVariables);
 }
 
-async function updateGame(api: GraphQLClient, gameId: string, grid: string): Promise<any> {
+async function updateGame(api: GraphQLClient, gameId: string, grid: string, status: string): Promise<any> {
   const queryVariables = {
     gameId,
-    grid
+    grid,
+    status
   };
 
   const updateGameQuery = `
-    mutation updateGame($gameId: ID!, $grid: Json!) {
+    mutation updateGame($gameId: ID!, $grid: Json!, $status: GameStatus) {
       updateGame(
         id: $gameId
         grid: $grid
+        status: $status
       ) {
         id
         grid
+        status
       }
     }
   `;
 
   return api.request<{ updateGame: any }>(updateGameQuery, queryVariables);
-}
-
-
-function addPiece(grid: any, columnIndex: number, piece: string) {
-  const column = grid[columnIndex];
-  let cellIndex = -1;
-
-  // Loops through column, looking for zeros (to determine next available cell)
-  column.forEach((columnPiece: any, i: number) => {
-    if (columnPiece === 0) {
-      cellIndex = i;
-    }
-  });
-
-  // Did we find an available cell?
-  if (cellIndex >= 0) {
-
-    // Adds piece to column cell
-    column[cellIndex] = piece;
-
-    // Makes board inactive if somebody won
-    // if (this.didSomebodyWin()) {
-    //   this.isActive = false;
-    // }
-  }
-  return grid;
 }

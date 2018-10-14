@@ -1,9 +1,9 @@
 // Games fragment - loops through a given list of games
 
 import * as React from 'react';
-import GameCard from '../GameCard';
 import Transition from 'react-transition-group/Transition';
 import * as TransitionGroup from 'react-transition-group/TransitionGroup';
+import GameCard from '../GameCard';
 
 const duration = 300;
 
@@ -15,17 +15,18 @@ const defaultStyle = {
 
 const transitionStyles = {
   entering: {opacity: 0, transform: `translateY(100vh)`},
-  entered: {opacity: 1, transform: `translateY(0)`},
+  entered: {opacity: 1, transform: `translateY(0)`}
 };
 
 type TransitionState = 'entering' | 'entered'
+
 interface Props {
   subscribeToNewGames: Function,
   games: Game[]
 }
 
 export default class Games extends React.Component<Props> {
-  componentWillMount() {
+  componentDidMount() {
     this.props.subscribeToNewGames();
   }
 

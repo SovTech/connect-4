@@ -62,18 +62,6 @@ export const ALL_USERS = gql`
 export class AllUsersQuery extends Query<{ allUsers: Array<User>; }, {}> {
 }
 
-export const LATEST_ROOM_STATUS = gql`
-  query {
-    allRoomStatusEntries(
-      first: 1
-      orderBy: createdAt_DESC
-    )  {
-      id
-      status
-    }
-  }
-`;
-
 export const SINGLE_GAME = gql`
   query singleGame($gameId: ID!) {
     Game(id: $gameId)  {
