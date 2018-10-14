@@ -8,7 +8,6 @@ export const StyledCell = styled.button`
   border-radius: 50%;
   border: none;
   color: #333;
-  cursor: pointer;
   display: inline-block;
   font-size: 12px;
   height: ${cellSize};
@@ -20,8 +19,9 @@ export const StyledCell = styled.button`
   vertical-align: middle;
   width: ${cellSize};
 
-  &:hover {
+  &.active:hover {
     background-color: ${theme.disabledColor};
+    cursor: pointer;
   }
 
   &.red {

@@ -10,23 +10,25 @@ type Props = {
   y: number;
   cell: string;
   gameId: string;
+  isActive: boolean;
 }
 
 export default class Cell extends React.Component<Props> {
   render() {
     const cellClasses = classnames({
-      'red': (this.props.cell === 'RED'),
-      'yellow': (this.props.cell === 'YELLOW')
+      'red': this.props.cell === 'RED',
+      'yellow': this.props.cell === 'YELLOW',
+      'active': this.props.isActive
     });
 
-    const {gameId} = this.props;
+    const {gameId, isActive} = this.props;
 
     return (
       <Mutation mutation={INSERT_PIECE} refetchQueries={[{query: ALL_GAMES}]}>
         {(insertPiece: Function) => (
           <StyledCell
             className={cellClasses}
-            onClick={() => insertPiece({variables: {gameId, column: this.props.y}})}
+            onClick={() => isActive ? insertPiece({variables: {gameId, column: this.props.y}}) : null}
           />
         )}
       </Mutation>
