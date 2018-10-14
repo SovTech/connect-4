@@ -47,9 +47,19 @@ export default async (event: FunctionEvent<EventData>) => {
 
       const updatedGrid = addPiece(grid, column, nextPlayer);
       const status = didSomeoneWin(updatedGrid) ? 'FINISHED' : 'IN_PROGRESS';
+      const winner = didSomeoneWin(updatedGrid) ? nextPlayer : null;
 
-      return await updateGame(api, gameId, updatedGrid, status, getNextColor(nextPlayer)).then(async game => {
-        return {data: {id: gameId, grid: updatedGrid, status: game.updateGame.status}};
+      return await updateGame(api, gameId, updatedGrid, status, getNextColor(nextPlayer), winner).then(async game => {
+        return {
+          data:
+            {
+              id: gameId,
+              grid: updatedGrid,
+              status: game.updateGame.status,
+              nextPlayer: game.updateGame.nextPlayer,
+              winner: game.updateGame.winner
+            }
+        };
       });
     });
   } catch (e) {
@@ -91,25 +101,28 @@ async function getGame(api: GraphQLClient, gameId: string): Promise<any> {
   return api.request<{ getGame: any }>(getGameQuery, queryVariables);
 }
 
-async function updateGame(api: GraphQLClient, gameId: string, grid: string, status: string, nextPlayer: SideColor): Promise<any> {
+async function updateGame(api: GraphQLClient, gameId: string, grid: string, status: string, nextPlayer: SideColor, winner: SideColor): Promise<any> {
   const queryVariables = {
     gameId,
     grid,
     status,
-    nextPlayer
+    nextPlayer,
+    winner
   };
 
   const updateGameQuery = `
-    mutation updateGame($gameId: ID!, $grid: Json!, $status: GameStatus, $nextPlayer: SideColor) {
+    mutation updateGame($gameId: ID!, $grid: Json!, $status: GameStatus, $nextPlayer: SideColor, $winner: SideColor) {
       updateGame(
         id: $gameId
         grid: $grid
         status: $status
         nextPlayer: $nextPlayer
+        winner: $winner
       ) {
         id
         grid
         status
+        winner
         nextPlayer
       }
     }
