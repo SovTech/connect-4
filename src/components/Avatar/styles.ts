@@ -19,12 +19,12 @@ export const AvatarWrapper = styled<WrapperProps, 'div'>('div')`
   width: ${props => props.size}px;
   height: ${props => props.size}px;
   
-    &.yellow-active {
-      border: thick solid ${theme.warning};
+    &.YELLOW {
+      border: 4px solid ${theme.warning};
     }
     
-    &.red-active {
-      border: thick solid ${theme.error};
+    &.RED {
+      border: 4px solid ${theme.error};
     }
 `;
 
