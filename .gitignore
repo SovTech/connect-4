@@ -25,3 +25,4 @@ graphcool/node_modules
 /src/constants/index.ts
 /graphcool/src/constants/index.ts
 /graphcool/.graphcoolrc
+graphql.config.json

@@ -1,6 +1,6 @@
 import { FunctionEvent } from 'graphcool-lib';
-import { SLACK_BOT_USERNAME, SLACK_TOKEN } from '../constants';
-import { getSlackChannelFromAlias } from '../utils';
+import { SLACK_BOT_USERNAME, SLACK_TOKEN } from '../../constants';
+import { getSlackChannelFromAlias } from '../../utils';
 
 // Leave as require - if import it will get removed because unused but we really need it
 require('isomorphic-fetch');

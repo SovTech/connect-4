@@ -1,8 +1,8 @@
 import { fromEvent, FunctionEvent } from 'graphcool-lib';
 import { GraphQLClient } from 'graphql-request';
 import * as fetch from 'isomorphic-fetch';
-import { COMPANY_DOMAIN, SLACK_CLIENT_ID, SLACK_CLIENT_SECRET } from '../constants';
-import { getSiteURLFromAlias } from '../utils';
+import { COMPANY_DOMAIN, SLACK_CLIENT_ID, SLACK_CLIENT_SECRET } from '../../constants';
+import { getSiteURLFromAlias } from '../../utils';
 
 interface User {
   id: string;

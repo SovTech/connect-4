@@ -9,107 +9,80 @@ import Avatar from '../Avatar';
 import BoardStatus from '../BoardStatus';
 import { H3 } from '../HeaderText';
 import { Board, Button, Card } from '../index';
-import Connect4 from '../../lib';
 import { CardInner, ColorText, PlayerDiv, PlayersDiv, TeamDiv, TeamsContainer } from './styles';
 
 interface GameCardProps extends Game {
   style?: React.CSSProperties;
+  grid: any;
 }
 
 export default class GameCard extends React.Component<GameCardProps> {
-  state = {
-    board: new Connect4.Board()
-  };
-
-  handleGameRestart = () => {
-    this.setState({
-      board: new Connect4.Board()
-    });
-  };
-
-  /**
-   * Function called when each cell is clicked, adding piece and re-render UI
-   */
-  handleGameAddPiece = (columnIndex: number, piece: string) => {
-    // Does nothing if board is inactive
-    if (!this.state.board.isActive) {
-      return null;
-    }
-
-    // Add piece
-    this.state.board.addPiece(columnIndex, piece);
-
-    // Refresh state with newly changed
-    return this.setState({
-      board: this.state.board
-    });
-  };
-
   render() {
+    const {id, redPlayer, yellowPlayer, winner, status, grid, style, createdAt} = this.props;
     return (
       <Card
-        style={this.props.style}
+        style={style}
         contentPadding={true}
-        title={formatEnum(this.props.status)}
-        date={this.props.createdAt}
+        title={formatEnum(status)}
+        date={createdAt}
       >
         <CardInner>
           <TeamsContainer>
             <TeamDiv>
-              <Link to={'/dashboard/' + this.props.id}>
+              <Link to={'/dashboard/' + id}>
                 <PlayersDiv>
                   <PlayerDiv>
                     <Avatar
                       size={50}
                       imageUrl={
-                        this.props.redPlayer
-                          ? this.props.redPlayer.avatarUrl
+                        redPlayer
+                          ? redPlayer.avatarUrl
                           : null
                       }
                     />
-                    {this.props.redPlayer ? this.props.redPlayer.firstName : '-'}
+                    {redPlayer ? redPlayer.firstName : '-'}
                   </PlayerDiv>
                 </PlayersDiv>
               </Link>
-              <ColorText>Yellow {this.props.winner === 'YELLOW' ? <span>🏆</span> : null}</ColorText>
+              <ColorText>Yellow {winner === 'YELLOW' ? <span>🏆</span> : null}</ColorText>
             </TeamDiv>
             <H3>VS</H3>
             <TeamDiv>
-              <Link to={'/dashboard/' + this.props.id}>
+              <Link to={'/dashboard/' + id}>
                 <PlayersDiv>
                   <PlayerDiv>
                     <Avatar
                       size={50}
                       imageUrl={
-                        this.props.yellowPlayer
-                          ? this.props.yellowPlayer.avatarUrl
+                        yellowPlayer
+                          ? yellowPlayer.avatarUrl
                           : null
                       }
                     />
-                    {this.props.yellowPlayer ? this.props.yellowPlayer.firstName : '-'}
+                    {yellowPlayer ? yellowPlayer.firstName : '-'}
                   </PlayerDiv>
                 </PlayersDiv>
               </Link>
-              <ColorText>Red {this.props.winner === 'RED' ? <span>🏆</span> : null}</ColorText>
+              <ColorText>Red {winner === 'RED' ? <span>🏆</span> : null}</ColorText>
             </TeamDiv>
           </TeamsContainer>
 
           {/* Connect 4 Board */}
-          <BoardStatus board={this.state.board} restart={this.handleGameRestart} />
-          <Board board={this.state.board} addPiece={this.handleGameAddPiece} />
+          <BoardStatus isActive={true} nextPlayer='RED' />
+          <Board gameId={id} grid={grid} isActive={true} />
 
-          {/* Buttons at the bottom */}
-          {this.props.status === 'NOT_STARTED' ?
+          {/* Buttons at the bottom TODO move to own component */}
+          {status === 'NOT_STARTED' ?
             <CancelGameMutation mutation={CANCEL_GAME}>
               {(cancelGame: Function) => (
                 <Button
                   noMargin={true}
-                  onClick={() => cancelGame({variables: {gameId: this.props.id}})}
+                  onClick={() => cancelGame({variables: {gameId: id}})}
                   text='Cancel Game'
                 />
               )}
             </CancelGameMutation>
-            : this.props.status === 'IN_PROGRESS' ?
+            : status === 'IN_PROGRESS' ?
               <Mutation mutation={SET_GAME_WINNER}>
                 {(setGameWinner: Function) => (
                   <TeamsContainer>
@@ -117,7 +90,7 @@ export default class GameCard extends React.Component<GameCardProps> {
                       noMargin={true}
                       onClick={() => setGameWinner({
                         variables: {
-                          gameId: this.props.id,
+                          gameId: id,
                           winner: 'YELLOW'
                         }
                       })}
@@ -128,7 +101,7 @@ export default class GameCard extends React.Component<GameCardProps> {
                       noMargin={true}
                       onClick={() => setGameWinner({
                         variables: {
-                          gameId: this.props.id,
+                          gameId: id,
                           winner: 'RED'
                         }
                       })}
