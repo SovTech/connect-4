@@ -22,6 +22,6 @@ yarn-error.log*
 .idea
 graphcool/node_modules
 /graphql.config.json
-/src/constants/index.ts
-/graphcool/src/constants/index.ts
 /graphcool/.graphcoolrc
+graphql.config.json
+.env

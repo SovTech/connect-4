@@ -1,0 +1,9 @@
+type insertPiecePayload {
+  id: ID!
+  grid: Json!
+  status: String!
+}
+
+extend type Mutation {
+  insertPiece(gameId: ID!, column: Int!): insertPiecePayload!
+}

@@ -1,3 +1,8 @@
+// Starting point of application includes routing
+
+// Load the env config
+require('dotenv').config();
+
 import bugsnag from 'bugsnag-js';
 import createPlugin from 'bugsnag-react';
 import * as React from 'react';
