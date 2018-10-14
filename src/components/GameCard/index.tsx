@@ -30,7 +30,7 @@ export default class GameCard extends React.Component<GameCardProps> {
               <Link to={'/dashboard/' + id}>
                 <PlayerDiv>
                   <Avatar
-                    className={nextPlayer === 'YELLOW' ? 'yellow-active' : ''}
+                    activeColor={nextPlayer === 'YELLOW' ? 'YELLOW' : undefined}
                     size={50}
                     imageUrl={
                       redPlayer
@@ -41,14 +41,14 @@ export default class GameCard extends React.Component<GameCardProps> {
                   {redPlayer ? redPlayer.firstName : '-'}
                 </PlayerDiv>
               </Link>
-              <ColorText>Yellow {winner === 'YELLOW' ? <span>🏆</span> : null}</ColorText>
+              <ColorText>Yellow {winner === 'YELLOW' && <span>🏆</span>}</ColorText>
             </TeamDiv>
             <H3>VS</H3>
             <TeamDiv>
               <Link to={'/dashboard/' + id}>
                 <PlayerDiv>
                   <Avatar
-                    className={nextPlayer === 'RED' ? 'red-active' : ''}
+                    activeColor={nextPlayer === 'RED' ? 'RED' : undefined}
                     size={50}
                     imageUrl={
                       yellowPlayer
@@ -59,7 +59,7 @@ export default class GameCard extends React.Component<GameCardProps> {
                   {yellowPlayer ? yellowPlayer.firstName : '-'}
                 </PlayerDiv>
               </Link>
-              <ColorText>Red {winner === 'RED' ? <span>🏆</span> : null}</ColorText>
+              <ColorText>Red {winner === 'RED' && <span>🏆</span>}</ColorText>
             </TeamDiv>
           </TeamsContainer>
 
