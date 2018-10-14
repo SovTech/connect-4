@@ -1,25 +1,11 @@
-// Header that contains the room status icon and the new game button
+// Header that contains the new game button
 
 import * as React from 'react';
-import { JOIN_GAME, SET_ROOM_STATUS, SetRoomStatusMutation } from '../../graphql/mutations';
-import { Mutation, Query, Subscription } from 'react-apollo';
-import { Button, RoomStatusButton } from '../index';
-import { ROOM_STATUS_SUBSCRIPTION } from '../../graphql/subscriptions';
-import { LATEST_ROOM_STATUS } from '../../graphql/queries';
+import { Mutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
+import { JOIN_GAME } from '../../graphql/mutations';
+import { Button } from '../index';
 import { HeaderButton, HeaderInner, HeaderOuter } from './styles';
-
-function getRoomStatus(data: any, subData: any, loading: boolean): RoomStatus {
-  if (loading) {
-    return 'LOADING';
-  } else if (subData) {
-    return subData.RoomStatusEntry.node.status;
-  } else if (data && data.allRoomStatusEntries) {
-    return data.allRoomStatusEntries[0].status;
-  } else {
-    return 'OFFLINE';
-  }
-}
 
 const Header: React.SFC<{}> = () => {
   return (
@@ -38,31 +24,9 @@ const Header: React.SFC<{}> = () => {
           </HeaderButton>}
         <Mutation mutation={JOIN_GAME}>
           {(createGame: Function) => (
-            <Button onClick={() => createGame()} text='LETS CONNECT!' title='Start or join a game'/>
+            <Button onClick={() => createGame()} text='LETS CONNECT!' title='Start or join a game' />
           )}
         </Mutation>
-        <Subscription subscription={ROOM_STATUS_SUBSCRIPTION}>
-          {({data: subData}) =>
-            <Query query={LATEST_ROOM_STATUS}>
-              {({loading, error, data}) =>
-                <SetRoomStatusMutation mutation={SET_ROOM_STATUS}>
-                  {(setRoomStatus: Function) => (
-                    <RoomStatusButton
-                      onClick={() =>
-                        setRoomStatus({
-                          variables:
-                            {
-                              status: getRoomStatus(data, subData, loading) === 'FREE'
-                                ? 'BUSY'
-                                : 'FREE'
-                            }
-                        })}
-                      status={getRoomStatus(data, subData, loading)}
-                    />
-                  )}
-                </SetRoomStatusMutation>}
-            </Query>}
-        </Subscription>
       </HeaderInner>
     </HeaderOuter>
   );

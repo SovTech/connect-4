@@ -32,24 +32,22 @@ export const SLACK_LOGIN_MUTATION = gql`
   }
 `;
 
-export const SET_ROOM_STATUS = gql`
-  mutation setRoomStatus($status: String!) {
-    setRoomStatus(status: $status) {
-      id
-      status
-    }
-  }
-`;
-
-export class SetRoomStatusMutation extends Mutation<{ setRoomStatus: { status: string }; }, { status: string }> {
-}
-
 export const SET_GAME_WINNER = gql`
   mutation setGameWinner($gameId: ID!, $winner: SideColor!) {
     updateGame(id: $gameId, winner: $winner, status: FINISHED) {
       id
       status
       winner
+    }
+  }
+`;
+
+export const INSERT_PIECE = gql`
+  mutation insertPiece($gameId: ID!, $column: Int!) {
+    insertPiece(gameId: $gameId, column: $column) {
+      id
+      grid
+      status
     }
   }
 `;

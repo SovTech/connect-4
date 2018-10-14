@@ -1,20 +1,16 @@
 import * as React from 'react';
 
 type Props = {
-  restart: Function;
-  board: any;
+  nextPlayer: string;
+  isActive: boolean;
 }
 
 export default class BoardStatus extends React.Component<Props> {
   render() {
     let nextTurn;
 
-    if (this.props.board.isActive) {
-      nextTurn = (
-        <div>
-          <div className='connect4-label'>Next turn:</div>
-          <div>{this.props.board.nextPlayer}</div>
-        </div>);
+    if (this.props.isActive) {
+      nextTurn = <div className='connect4-label'>Next turn: {this.props.nextPlayer}</div>;
     } else {
       nextTurn = (
         <div>Game over!</div>);
@@ -25,9 +21,6 @@ export default class BoardStatus extends React.Component<Props> {
         <div>
           {nextTurn}
         </div>
-        <p>
-          <button onClick={() => this.props.restart()}>Restart game</button>
-        </p>
       </div>
     );
   }

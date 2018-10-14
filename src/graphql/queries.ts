@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import Query from 'react-apollo/Query';
 
 export const ALL_GAMES = gql`
-  query {
+  query allGames {
     allGames(
       orderBy: createdAt_DESC
       first: 5
@@ -11,6 +11,9 @@ export const ALL_GAMES = gql`
       createdAt
       status
       winner
+      grid
+      inserts
+      nextPlayer
       yellowPlayer {
         id
         avatarUrl
@@ -33,7 +36,7 @@ export class AllGamesQuery extends Query<{ allGames: Array<Game>; }, {}> {
 }
 
 export const ALL_USERS = gql`
-  query {
+  query allUsers {
     allUsers {
       id
       email
@@ -58,18 +61,6 @@ export const ALL_USERS = gql`
 
 export class AllUsersQuery extends Query<{ allUsers: Array<User>; }, {}> {
 }
-
-export const LATEST_ROOM_STATUS = gql`
-  query {
-    allRoomStatusEntries(
-      first: 1
-      orderBy: createdAt_DESC
-    )  {
-      id
-      status
-    }
-  }
-`;
 
 export const SINGLE_GAME = gql`
   query singleGame($gameId: ID!) {

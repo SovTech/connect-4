@@ -46,7 +46,17 @@ export const NOT_STARTED_GAME: Game = {
   winner: null,
   createdAt: '',
   id: '100',
-  status: 'NOT_STARTED'
+  status: 'NOT_STARTED',
+  nextPlayer: 'RED',
+  grid: [
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0]
+  ]
 };
 
 export const IN_PROGRESS_GAME: Game = {
@@ -55,7 +65,17 @@ export const IN_PROGRESS_GAME: Game = {
   winner: null,
   createdAt: '',
   id: '101',
-  status: 'IN_PROGRESS'
+  status: 'IN_PROGRESS',
+  nextPlayer: 'RED',
+  grid: [
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0]
+  ]
 };
 
 export const FINISHED_GAME: Game = {
@@ -64,7 +84,17 @@ export const FINISHED_GAME: Game = {
   winner: 'RED',
   createdAt: '',
   id: '102',
-  status: 'FINISHED'
+  status: 'FINISHED',
+  nextPlayer: 'RED',
+  grid: [
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0]
+  ]
 };
 
 export const CANCELLED_GAME: Game = {
@@ -73,5 +103,15 @@ export const CANCELLED_GAME: Game = {
   winner: null,
   createdAt: '',
   id: '103',
-  status: 'CANCELLED'
+  status: 'CANCELLED',
+  nextPlayer: 'RED',
+  grid: [
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0]
+  ]
 };
