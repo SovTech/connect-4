@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Transition from 'react-transition-group/Transition';
 import * as TransitionGroup from 'react-transition-group/TransitionGroup';
+import { Game } from '../../../custom-typings/Game';
 import GameCard from '../GameCard';
 
 const duration = 300;

@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { Game } from '../../../custom-typings/Game';
 import { CANCEL_GAME, CancelGameMutation } from '../../graphql/mutations';
 import { formatEnum } from '../../utils';
 import Avatar from '../Avatar';
