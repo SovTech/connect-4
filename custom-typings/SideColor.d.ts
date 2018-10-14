@@ -1,1 +1,1 @@
-export declare type SideColor = 'RED' | 'YELLOW';
+declare type SideColor = 'RED' | 'YELLOW';

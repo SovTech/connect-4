@@ -1,6 +1,4 @@
 // Dummy content used for testing
-import { Game } from '../../custom-typings/Game';
-
 export const TEST_AVATAR_URL = 'https://avatars.slack-edge.com/2018-01-24/304961715815_8725e6fc5dc6150e084b_192.png';
 
 export const PLAYER_100: User = {

@@ -1,6 +1,6 @@
 import { fromEvent, FunctionEvent } from 'graphcool-lib';
 import { GraphQLClient } from 'graphql-request';
-import { SideColor } from '../../../../custom-typings/SideColor';
+import { SideColor } from '../../../custom-typings/SideColor';
 import { addPiece } from '../../utils/connect4/board';
 import { didSomeoneWin } from '../../utils/connect4/matches';
 

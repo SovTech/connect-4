@@ -1,6 +1,5 @@
 import gql from 'graphql-tag';
 import Query from 'react-apollo/Query';
-import { Game } from '../../custom-typings/Game';
 
 export const ALL_GAMES = gql`
   query allGames {
@@ -33,7 +32,7 @@ export const ALL_GAMES = gql`
   }
 `;
 
-export class AllGamesQuery extends Query<{ allGames: Game[]; }, {}> {
+export class AllGamesQuery extends Query<{ allGames: Array<Game>; }, {}> {
 }
 
 export const ALL_USERS = gql`
@@ -60,7 +59,7 @@ export const ALL_USERS = gql`
   }
 `;
 
-export class AllUsersQuery extends Query<{ allUsers: User[]; }, {}> {
+export class AllUsersQuery extends Query<{ allUsers: Array<User>; }, {}> {
 }
 
 export const SINGLE_GAME = gql`
