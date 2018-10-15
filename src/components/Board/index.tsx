@@ -1,7 +1,10 @@
 import classNames from 'classnames';
 import * as React from 'react';
+import { Mutation } from 'react-apollo';
+import { INSERT_PIECE } from '../../graphql/mutations';
+import { ALL_GAMES } from '../../graphql/queries';
 import { Cell } from '../index';
-import { BoardWrapper, Column } from './styles';
+import { BoardWrapper, Column, StyledArrowDown } from './styles';
 
 type Props = {
   gameId: string;
@@ -21,6 +24,14 @@ export default class Board extends React.Component<Props> {
     const cells = grid.map((column: any[], y: number) => {
       return (
         <Column key={`column-${y}`}>
+          <Mutation mutation={INSERT_PIECE} refetchQueries={[{query: ALL_GAMES}]}>
+            {(insertPiece: Function) => (
+              <StyledArrowDown
+                size={32}
+                onClick={() => isActive ? insertPiece({variables: {gameId, column: y}}) : null}
+              />
+            )}
+          </Mutation>
           {column.map((cell, x) => {
             return (
               <Cell
@@ -32,7 +43,7 @@ export default class Board extends React.Component<Props> {
                 cell={cell}
               />
             );
-
+  
           })}
         </Column>
       );

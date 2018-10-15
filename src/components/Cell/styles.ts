@@ -11,18 +11,13 @@ export const StyledCell = styled.button`
   display: inline-block;
   font-size: 12px;
   height: ${cellSize};
-  margin: 10px auto;
+  margin: 5px auto;
   outline: none;
   padding: 0;
   text-align: center;
   text-decoration: none;
   vertical-align: middle;
   width: ${cellSize};
-
-  &.active:hover {
-    background-color: ${theme.disabledColor};
-    cursor: pointer;
-  }
 
   &.red {
     background-color: ${theme.error} !important;

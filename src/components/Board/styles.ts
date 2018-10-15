@@ -1,4 +1,6 @@
+import { ArrowDownCircle } from 'react-feather';
 import styled from 'styled-components';
+import theme from '../../theme';
 
 export const BoardWrapper = styled.div`
   display: flex;
@@ -10,4 +12,14 @@ export const BoardWrapper = styled.div`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+`;
+
+export const StyledArrowDown = styled(ArrowDownCircle)`
+  color: ${theme.disabledColor};
+    
+  &:hover {
+    color: ${theme.baseColor};
+    cursor: pointer;
+  }
 `;
