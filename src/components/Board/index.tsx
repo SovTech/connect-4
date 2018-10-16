@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Mutation } from 'react-apollo';
 import { INSERT_PIECE } from '../../graphql/mutations';
 import { ALL_GAMES } from '../../graphql/queries';
+import { showToast } from '../../utils';
 import { Cell } from '../index';
 import { BoardWrapper, Column, StyledArrowDown } from './styles';
 
@@ -25,12 +26,17 @@ export default class Board extends React.Component<Props> {
       return (
         <Column key={`column-${y}`}>
           <Mutation mutation={INSERT_PIECE} refetchQueries={[{query: ALL_GAMES}]}>
-            {(insertPiece: Function) => (
-              <StyledArrowDown
-                size={32}
-                onClick={() => isActive ? insertPiece({variables: {gameId, column: y}}) : null}
-              />
-            )}
+            {(insertPiece: Function, {error}) => {
+              if (error) {
+                showToast('Its not your turn! 🙅', 3000);
+              }
+              return (
+                <StyledArrowDown
+                  size={32}
+                  onClick={() => isActive ? insertPiece({variables: {gameId, column: y}}) : null}
+                />
+              );
+            }}
           </Mutation>
           {column.map((cell, x) => {
             return (
@@ -43,7 +49,7 @@ export default class Board extends React.Component<Props> {
                 cell={cell}
               />
             );
-  
+
           })}
         </Column>
       );
