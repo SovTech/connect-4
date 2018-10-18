@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import styled from 'styled-components';
 import theme from '../../theme';
 
@@ -5,8 +6,8 @@ const cellSize = '30px';
 
 export const StyledCell = styled.button`
   background: ${theme.disabledColorLight};
+  border: thin solid ${darken(0.1, theme.disabledColorLight)};
   border-radius: 50%;
-  border: none;
   color: #333;
   display: inline-block;
   font-size: 12px;
