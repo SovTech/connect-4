@@ -1,24 +1,12 @@
 import { fromEvent, FunctionEvent } from 'graphcool-lib';
 import { GraphQLClient } from 'graphql-request';
+import { SideColor } from '../../../custom-typings/SideColor';
 import { addPiece } from '../../utils/connect4/board';
 import { didSomeoneWin } from '../../utils/connect4/matches';
 
 interface EventData {
   gameId: string;
   column: number;
-}
-
-interface Player {
-  email: string;
-  id: string;
-}
-
-interface Game {
-  Game: {
-    id: string;
-    yellowPlayer: Player;
-    redPlayer: Player;
-  }
 }
 
 export default async (event: FunctionEvent<EventData>) => {
@@ -39,21 +27,39 @@ export default async (event: FunctionEvent<EventData>) => {
 
     return await getGame(api, gameId).then(async game => {
 
+      const {grid, nextPlayer, redPlayer, yellowPlayer} = game.Game;
+
       let selectedColor;
 
-      if (game.Game.redPlayer && game.Game.redPlayer.id === playerId) {
+      if (redPlayer && redPlayer.id === playerId) {
         selectedColor = 'RED';
-      } else if (game.Game.yellowPlayer && game.Game.yellowPlayer.id === playerId) {
+      } else if (yellowPlayer && yellowPlayer.id === playerId) {
         selectedColor = 'YELLOW';
       } else {
         return {error: 'Player is not in this game'};
       }
 
-      const updatedGrid = addPiece(game.Game.grid, column, selectedColor);
-      const status = didSomeoneWin(updatedGrid) ? 'FINISHED' : 'IN_PROGRESS';
+      console.log('&&&&', selectedColor, nextPlayer);
 
-      return await updateGame(api, gameId, updatedGrid, status).then(async game => {
-        return {data: {id: gameId, grid: updatedGrid, status: game.updateGame.status}};
+      if (selectedColor !== nextPlayer) {
+        return {error: 'Its not your turn'};
+      }
+
+      const updatedGrid = addPiece(grid, column, nextPlayer);
+      const status = didSomeoneWin(updatedGrid) ? 'FINISHED' : 'IN_PROGRESS';
+      const winner = didSomeoneWin(updatedGrid) ? nextPlayer : null;
+
+      return await updateGame(api, gameId, updatedGrid, status, getNextColor(nextPlayer), winner).then(async game => {
+        return {
+          data:
+            {
+              id: gameId,
+              grid: updatedGrid,
+              status: game.updateGame.status,
+              nextPlayer: game.updateGame.nextPlayer,
+              winner: game.updateGame.winner
+            }
+        };
       });
     });
   } catch (e) {
@@ -81,6 +87,7 @@ async function getGame(api: GraphQLClient, gameId: string): Promise<any> {
         id
         inserts
         grid
+        nextPlayer
         redPlayer {
           id
         }
@@ -94,26 +101,39 @@ async function getGame(api: GraphQLClient, gameId: string): Promise<any> {
   return api.request<{ getGame: any }>(getGameQuery, queryVariables);
 }
 
-async function updateGame(api: GraphQLClient, gameId: string, grid: string, status: string): Promise<any> {
+async function updateGame(api: GraphQLClient, gameId: string, grid: string, status: string, nextPlayer: SideColor, winner: SideColor): Promise<any> {
   const queryVariables = {
     gameId,
     grid,
-    status
+    status,
+    nextPlayer,
+    winner
   };
 
   const updateGameQuery = `
-    mutation updateGame($gameId: ID!, $grid: Json!, $status: GameStatus) {
+    mutation updateGame($gameId: ID!, $grid: Json!, $status: GameStatus, $nextPlayer: SideColor, $winner: SideColor) {
       updateGame(
         id: $gameId
         grid: $grid
         status: $status
+        nextPlayer: $nextPlayer
+        winner: $winner
       ) {
         id
         grid
         status
+        winner
+        nextPlayer
       }
     }
   `;
 
   return api.request<{ updateGame: any }>(updateGameQuery, queryVariables);
+}
+
+function getNextColor(currentColor: SideColor) {
+  if (currentColor === 'RED') {
+    return 'YELLOW';
+  }
+  return 'RED';
 }

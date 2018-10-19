@@ -11,7 +11,6 @@ import * as ReactDOM from 'react-dom';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { injectGlobal } from 'styled-components';
 import { client } from './apollo';
 import { BUGSNAG_API_KEY, JWT_LOCAL_STORAGE_KEY } from './constants';
 import Dashboard from './containers/Dashboard';
@@ -20,14 +19,12 @@ import Login from './containers/Login';
 import OAuth from './containers/OAuth';
 import { PageNotFound } from './containers/PageNotFound';
 import SingleGame from './containers/SingleGame';
-import { GLOBAL_STYLES } from './globalStyles';
+import { GlobalStyle } from './globalStyles';
 import registerServiceWorker from './registerServiceWorker';
 import { isTokenValid, showToast } from './utils';
 
 const bugsnagClient = bugsnag(BUGSNAG_API_KEY);
 const ErrorBoundary = bugsnagClient.use(createPlugin(React));
-
-injectGlobal([GLOBAL_STYLES] as any);
 
 const PrivateRoute = ({component: Component, ...rest}: any) => (
   <Route
@@ -58,6 +55,7 @@ function isLoggedIn() {
 ReactDOM.render(
   <ErrorBoundary>
     <ApolloProvider client={client}>
+      <GlobalStyle />
       <BrowserRouter>
         <Switch>
           <LoginRoute exact={true} path='/' component={Login} />
