@@ -1,4 +1,4 @@
-import { ArrowDownCircle } from 'react-feather';
+import { ArrowDownCircle, XCircle } from 'react-feather';
 import styled from 'styled-components';
 import theme from '../../theme';
 
@@ -18,8 +18,12 @@ export const Column = styled.div`
 export const StyledArrowDown = styled(ArrowDownCircle)`
   color: ${theme.disabledColor};
     
-  &:hover {
+  &.active {
     color: ${theme.baseColor};
     cursor: pointer;
   }
+`;
+
+export const StyledCircle = styled(XCircle)`
+  color: ${theme.disabledColor};
 `;

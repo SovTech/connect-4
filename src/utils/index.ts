@@ -1,7 +1,7 @@
 import * as jwtDecode from 'jwt-decode';
-import packageJson from '../../package.json';
-import { IS_TEST } from '../constants';
 import { toast } from 'react-toastify';
+import packageJson from '../../package.json';
+import { IS_TEST, JWT_LOCAL_STORAGE_KEY } from '../constants';
 
 export function convertFileToImageURL(fileURL: string | undefined, small?: boolean): string {
   if (!fileURL) {
@@ -139,4 +139,14 @@ export function showToast(toastMessage: string | JSX.Element, autoClose: number 
     autoClose,
     position: toast.POSITION.BOTTOM_CENTER
   });
+}
+
+/**
+ * Gets the User ID from the JWT in local storage
+ * Useful to tell if the player is in the game
+ */
+export function getLoggedInUserId(): string {
+  const token = localStorage.getItem(JWT_LOCAL_STORAGE_KEY) || '';
+  const decodedJwt: any = jwtDecode(token);
+  return decodedJwt.userId;
 }
