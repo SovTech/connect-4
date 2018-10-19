@@ -43,7 +43,7 @@ type Game @model {
   updatedAt: DateTime!
   createdAt: DateTime!
 
-  placesRemaining: Int! @defaultValue(value: 1) @migrationValue(value: 0)
+  placesRemaining: Int! @defaultValue(value: 1)
   inserts: Int! @defaultValue(value: 0)
   grid: Json! @defaultValue(value: "[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]")
 
