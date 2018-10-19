@@ -34,13 +34,10 @@ export default (event: FunctionEvent<EventData>) => {
     return {error: 'Don\'t send message'};
   } else if (status === 'CANCELLED') {
     text = `Game cancelled :cry:`;
-  } else if (placesRemaining === 1) {
-    text = `<@${yellowPlayerName}> %26 <@${redPlayerName}> are in! %0A` +
-      `Only 1 more spot to go! Ahhhhh!!! :scream_cat:`;
   } else if (placesRemaining === 0) {
     text = `Awesome! All spots are filled! :thumbsup_all: %0A` +
       `Let's go already! :bender: %0A` +
-      `<@${yellowPlayerName}> %26 VS <@${redPlayerName}> %26`;
+      `<@${yellowPlayerName}> VS <@${redPlayerName}>`;
   } else {
     return {error: 'Other change occurred'};
   }
