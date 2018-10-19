@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { ContainerWrapper, Header } from '../../components';
-import { ALL_USERS, AllUsersQuery } from '../../graphql/queries';
 import styled from 'styled-components';
+import { Avatar, ContainerWrapper, H2, Header } from '../../components';
+import { ALL_USERS, AllUsersQuery } from '../../graphql/queries';
 import theme from '../../theme';
-import { H2 } from '../../components/HeaderText';
 import { immutableSort } from '../../utils';
-import Avatar from '../../components/Avatar';
 
 const UserRow = styled.div`
   color: white;
@@ -33,7 +31,7 @@ export default class Leaderboard extends React.Component {
       + `${index === 0 ? '🏆' : ''}${index === length - 1 ? '🥔👑' : ''}`;
     return (
       <UserRow key={user.email} title={index + 1 + `. ` + user.firstName.toUpperCase()}>
-        <Avatar imageUrl={user.avatarUrl} size={40}/>
+        <Avatar imageUrl={user.avatarUrl} size={40} />
         <span>{userString}</span>
       </UserRow>
     );
@@ -42,7 +40,7 @@ export default class Leaderboard extends React.Component {
   render() {
     return (
       <ContainerWrapper>
-        <Header/>
+        <Header />
         <AllUsersQuery query={ALL_USERS}>
           {({loading, error, data}) => {
             if (loading) {
