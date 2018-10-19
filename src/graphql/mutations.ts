@@ -48,6 +48,8 @@ export const INSERT_PIECE = gql`
       id
       grid
       status
+      nextPlayer
+      winner
     }
   }
 `;

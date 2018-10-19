@@ -1,1 +1,0 @@
-declare type RoomStatus = 'FREE' | 'LOADING' | 'OFFLINE' | 'BUSY';

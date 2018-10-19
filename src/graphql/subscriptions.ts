@@ -50,19 +50,3 @@ export const GAME_CREATED_SUBSCRIPTION = gql`
     }
   }
 `;
-
-export const ROOM_STATUS_SUBSCRIPTION = gql`
-  subscription roomStatus {
-    RoomStatusEntry(
-      filter: {
-        mutation_in: [CREATED]
-      }
-    ) {
-      mutation
-      node {
-        id
-        status
-      }
-    }
-  }
-`;
