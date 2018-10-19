@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { CANCEL_GAME, CancelGameMutation } from '../../graphql/mutations';
-import { formatEnum } from '../../utils';
+import { formatEnum, getLoggedInUserId } from '../../utils';
 import Avatar from '../Avatar';
 import { H3 } from '../HeaderText';
 import { Board, Button, Card } from '../index';
@@ -15,6 +15,26 @@ interface GameCardProps extends Game {
 }
 
 export default class GameCard extends React.Component<GameCardProps> {
+  private static renderPlayerName(player: User | null) {
+    if (!player) {
+      return '-';
+    }
+    if (player.id === getLoggedInUserId()) {
+      return 'You';
+    }
+    return player.firstName;
+  }
+
+  private static isGamePlayable(status: GameStatus, redPlayer: User | null, yellowPlayer: User | null) {
+    if (status !== 'IN_PROGRESS') {
+      return false;
+    }
+    if (!redPlayer || !yellowPlayer) {
+      return false;
+    }
+    return redPlayer.id === getLoggedInUserId() || yellowPlayer.id === getLoggedInUserId();
+  }
+
   render() {
     const {id, redPlayer, yellowPlayer, winner, status, grid, style, createdAt, nextPlayer} = this.props;
     return (
@@ -30,7 +50,7 @@ export default class GameCard extends React.Component<GameCardProps> {
               <Link to={'/dashboard/' + id}>
                 <PlayerDiv>
                   <Avatar
-                    activeColor={nextPlayer === 'RED' ? 'RED' : undefined}
+                    activeColor={status === 'IN_PROGRESS' && nextPlayer === 'RED' ? 'RED' : undefined}
                     size={50}
                     imageUrl={
                       redPlayer
@@ -38,7 +58,7 @@ export default class GameCard extends React.Component<GameCardProps> {
                         : null
                     }
                   />
-                  {redPlayer ? redPlayer.firstName : '-'}
+                  {GameCard.renderPlayerName(redPlayer)}
                 </PlayerDiv>
               </Link>
               <ColorText>Red {winner === 'RED' && <span>🏆</span>}</ColorText>
@@ -48,7 +68,7 @@ export default class GameCard extends React.Component<GameCardProps> {
               <Link to={'/dashboard/' + id}>
                 <PlayerDiv>
                   <Avatar
-                    activeColor={nextPlayer === 'YELLOW' ? 'YELLOW' : undefined}
+                    activeColor={status === 'IN_PROGRESS' && nextPlayer === 'YELLOW' ? 'YELLOW' : undefined}
                     size={50}
                     imageUrl={
                       yellowPlayer
@@ -56,14 +76,14 @@ export default class GameCard extends React.Component<GameCardProps> {
                         : null
                     }
                   />
-                  {yellowPlayer ? yellowPlayer.firstName : '-'}
+                  {GameCard.renderPlayerName(yellowPlayer)}
                 </PlayerDiv>
               </Link>
               <ColorText>Yellow {winner === 'YELLOW' && <span>🏆</span>}</ColorText>
             </TeamDiv>
           </TeamsContainer>
 
-          <Board gameId={id} grid={grid} isActive={status === 'IN_PROGRESS'} />
+          <Board gameId={id} grid={grid} isActive={GameCard.isGamePlayable(status, redPlayer, yellowPlayer)} />
 
           {status === 'NOT_STARTED' &&
           <CancelGameMutation mutation={CANCEL_GAME}>

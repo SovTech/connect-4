@@ -5,7 +5,7 @@ import { INSERT_PIECE } from '../../graphql/mutations';
 import { ALL_GAMES } from '../../graphql/queries';
 import { showToast } from '../../utils';
 import { Cell } from '../index';
-import { BoardWrapper, Column, StyledArrowDown } from './styles';
+import { BoardWrapper, Column, StyledArrowDown, StyledCircle } from './styles';
 
 type Props = {
   gameId: string;
@@ -31,23 +31,22 @@ export default class Board extends React.Component<Props> {
               if (error) {
                 showToast('Its not your turn! 🙅', 3000);
               }
-              return (
-                <StyledArrowDown
-                  size={32}
-                  className={clickable ? 'active' : ''}
-                  onClick={() => clickable ? insertPiece({variables: {gameId, column: y}}) : null}
-                />
-              );
+              if (clickable) {
+                return (
+                  <StyledArrowDown
+                    size={32}
+                    className={clickable ? 'active' : ''}
+                    onClick={() => clickable ? insertPiece({variables: {gameId, column: y}}) : null}
+                  />
+                );
+              }
+              return <StyledCircle size={32} />;
             }}
           </Mutation>
           {column.map((cell, x) => {
             return (
               <Cell
-                isActive={isActive}
-                gameId={gameId}
                 key={`cell-${x}-${y}`}
-                x={x}
-                y={y}
                 cell={cell}
               />
             );
