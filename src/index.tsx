@@ -3,8 +3,6 @@
 // Load the env config
 require('dotenv').config();
 
-import bugsnag from 'bugsnag-js';
-import createPlugin from 'bugsnag-react';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import * as ReactDOM from 'react-dom';
@@ -12,7 +10,8 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { client } from './apollo';
-import { BUGSNAG_API_KEY, JWT_LOCAL_STORAGE_KEY } from './constants';
+import { ErrorBoundary, ErrorScreen } from './components';
+import { JWT_LOCAL_STORAGE_KEY } from './constants';
 import Dashboard from './containers/Dashboard';
 import Leaderboard from './containers/Leaderboard';
 import Login from './containers/Login';
@@ -22,9 +21,6 @@ import SingleGame from './containers/SingleGame';
 import { GlobalStyle } from './globalStyles';
 import registerServiceWorker from './registerServiceWorker';
 import { isTokenValid, showToast } from './utils';
-
-const bugsnagClient = bugsnag(BUGSNAG_API_KEY);
-const ErrorBoundary = bugsnagClient.use(createPlugin(React));
 
 const PrivateRoute = ({component: Component, ...rest}: any) => (
   <Route
@@ -53,7 +49,7 @@ function isLoggedIn() {
 }
 
 ReactDOM.render(
-  <ErrorBoundary>
+  <ErrorBoundary FallbackComponent={ErrorScreen}>
     <ApolloProvider client={client}>
       <GlobalStyle />
       <BrowserRouter>

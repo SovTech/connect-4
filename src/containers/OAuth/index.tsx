@@ -1,13 +1,12 @@
 // OAuth Page to complete the Slack login
 
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import { ChildProps, graphql } from 'react-apollo';
-import { ContainerWrapper } from '../../components';
-import { H2 } from '../../components/HeaderText';
+import { RouteComponentProps } from 'react-router-dom';
+import { ContainerWrapper, H2 } from '../../components';
+import { JWT_LOCAL_STORAGE_KEY } from '../../constants';
 import { SLACK_LOGIN_MUTATION } from '../../graphql/mutations';
 import { getUrlParameterByName } from '../../utils';
-import { JWT_LOCAL_STORAGE_KEY } from '../../constants';
 
 interface Props extends RouteComponentProps<{}> {
   mutate: Function;
