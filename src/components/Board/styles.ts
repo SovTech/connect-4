@@ -18,7 +18,7 @@ export const Column = styled.div`
 export const StyledArrowDown = styled(ArrowDownCircle)`
   color: ${theme.disabledColor};
     
-  &:hover {
+  &.active:hover {
     color: ${theme.baseColor};
     cursor: pointer;
   }

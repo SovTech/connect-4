@@ -26,14 +26,16 @@ export default class Board extends React.Component<Props> {
       return (
         <Column key={`column-${y}`}>
           <Mutation mutation={INSERT_PIECE} refetchQueries={[{query: ALL_GAMES}]}>
-            {(insertPiece: Function, {error}) => {
+            {(insertPiece: Function, {error, loading}) => {
+              const clickable = isActive && !loading;
               if (error) {
                 showToast('Its not your turn! 🙅', 3000);
               }
               return (
                 <StyledArrowDown
                   size={32}
-                  onClick={() => isActive ? insertPiece({variables: {gameId, column: y}}) : null}
+                  className={clickable ? 'active' : ''}
+                  onClick={() => clickable ? insertPiece({variables: {gameId, column: y}}) : null}
                 />
               );
             }}
