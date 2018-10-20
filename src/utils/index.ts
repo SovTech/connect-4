@@ -142,11 +142,13 @@ export function showToast(toastMessage: string | JSX.Element, autoClose: number 
 }
 
 /**
- * Gets the User ID from the JWT in local storage
- * Useful to tell if the player is in the game
+ * Gets the User ID from the JWT in local storage or a token passed to it
+ * @param token - JWT
  */
-export function getLoggedInUserId(): string {
-  const token = localStorage.getItem(JWT_LOCAL_STORAGE_KEY) || '';
+export function getLoggedInUserId(token?: string): string {
+  if (!token) {
+    token = localStorage.getItem(JWT_LOCAL_STORAGE_KEY) || '';
+  }
   const decodedJwt: any = jwtDecode(token);
   return decodedJwt.userId;
 }
