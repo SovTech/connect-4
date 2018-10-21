@@ -4,9 +4,10 @@ import * as React from 'react';
 import { ChildProps, graphql } from 'react-apollo';
 import { RouteComponentProps } from 'react-router-dom';
 import { ContainerWrapper, H2 } from '../../components';
+import { bugsnagClient } from '../../components/ErrorBoundary';
 import { JWT_LOCAL_STORAGE_KEY } from '../../constants';
 import { SLACK_LOGIN_MUTATION } from '../../graphql/mutations';
-import { getUrlParameterByName } from '../../utils';
+import { getLoggedInUserId, getUrlParameterByName } from '../../utils';
 
 interface Props extends RouteComponentProps<{}> {
   mutate: Function;
@@ -42,8 +43,9 @@ class OAuth extends React.PureComponent<ChildProps<Props, Response>, State> {
           token
         }
       });
-
-      window.localStorage.setItem(JWT_LOCAL_STORAGE_KEY, data.data.slackLogin.token);
+      const userToken = data.data.slackLogin.token;
+      window.localStorage.setItem(JWT_LOCAL_STORAGE_KEY, userToken);
+      bugsnagClient.user = {id: getLoggedInUserId(userToken)};
       this.setState({loading: false});
       this.props.history.replace('/dashboard');
 
