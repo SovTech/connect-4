@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import Query from 'react-apollo/Query';
+import { Query } from 'react-apollo';
 
 export const ALL_GAMES = gql`
   query allGames {

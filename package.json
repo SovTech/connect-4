@@ -3,10 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/classnames": "^2.2.6",
-    "@types/styled-components": "^4.0.1",
     "apollo-cache-inmemory": "^1.2.9",
-    "apollo-client": "^2.4.1",
+    "apollo-client": "^2.4.2",
     "apollo-link": "^1.2.2",
     "apollo-link-context": "^1.0.8",
     "apollo-link-error": "^1.0.9",
@@ -26,7 +24,7 @@
     "react-dom": "^16.5.0",
     "react-feather": "^1.1.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts-ts": "^2.16.0",
+    "react-scripts-ts": "^3.1.0",
     "react-timeago": "^4.1.9",
     "react-toastify": "^4.1.0",
     "react-transition-group": "^2.4.0",
@@ -50,8 +48,9 @@
     "@storybook/addon-links": "^3.4.4",
     "@storybook/addons": "^3.4.4",
     "@storybook/react": "^3.4.4",
+    "@types/classnames": "^2.2.6",
     "@types/graphql": "^14.0.0",
-    "@types/jest": "^22.2.2",
+    "@types/jest": "^23.3.5",
     "@types/jwt-decode": "^2.2.1",
     "@types/node": "^9.6.4",
     "@types/prop-types": "^15.5.2",
@@ -63,13 +62,14 @@
     "@types/react-transition-group": "^2.0.11",
     "@types/storybook__addon-actions": "^3.0.3",
     "@types/storybook__react": "^3.0.7",
+    "@types/styled-components": "^4.0.1",
     "@types/ws": "^6.0.1",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
-    "graphql-mock": "^1.0.3",
+    "graphql-mock": "^1.1.0",
     "react-chromatic": "^0.8.3",
     "react-test-renderer": "^16.3.2",
     "storybook-react-router": "^1.0.1",
-    "typescript": "^3.0.3"
+    "typescript": "^3.1.3"
   }
 }
