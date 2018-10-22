@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a Cell correctly 1`] = `
+<div
+  className="sc-bdVaJa kFXOhx"
+>
+  <div
+    className="sc-bwzfXH imUrkV"
+  >
+    <div>
+      das kinders
+    </div>
+  </div>
+  <div
+    className="sc-htpNat bUJwTp"
+  >
+    v
+    x.x.x
+  </div>
+</div>
+`;

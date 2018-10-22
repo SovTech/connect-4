@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar Component renders a non-user Avatar correctly when there is a url 1`] = `
+<div
+  className="sc-bdVaJa fwEAqZ"
+  size={50}
+>
+  <div
+    className="sc-bwzfXH jeCDFy"
+    size={50}
+    style={
+      Object {
+        "backgroundImage": "url(\\"https://dummyimage.png\\")",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Avatar Component renders a non-user Avatar correctly when there is no url 1`] = `
+<div
+  className="sc-bdVaJa fwEAqZ"
+  size={50}
+/>
+`;
+
+exports[`Avatar Component renders a small Avatar correctly 1`] = `
+<div
+  className="sc-bdVaJa hspnGX"
+  size={30}
+>
+  <div
+    className="sc-bwzfXH fFqIba"
+    size={30}
+    style={
+      Object {
+        "backgroundImage": "url(\\"https://dummyimage.png\\")",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Avatar Component renders a user Avatar correctly when there is a url 1`] = `
+<div
+  className="sc-bdVaJa fwEAqZ"
+  size={50}
+>
+  <div
+    className="sc-bwzfXH jeCDFy"
+    size={50}
+    style={
+      Object {
+        "backgroundImage": "url(\\"https://dummyimage.png\\")",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Avatar Component renders a user Avatar correctly when there is no url 1`] = `
+<div
+  className="sc-bdVaJa fwEAqZ"
+  size={50}
+/>
+`;

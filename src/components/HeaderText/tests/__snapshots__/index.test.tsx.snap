@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderText Components renders a H1 correctly 1`] = `
+<h1
+  className="sc-bdVaJa eBPzzR"
+/>
+`;
+
+exports[`HeaderText Components renders a H2 correctly 1`] = `
+<h2
+  className="sc-bwzfXH ErJNR"
+/>
+`;
+
+exports[`HeaderText Components renders a H3 correctly 1`] = `
+<h3
+  className="sc-htpNat gLVzZr"
+/>
+`;
+
+exports[`HeaderText Components renders a H4 correctly 1`] = `
+<h4
+  className="sc-bxivhb kUrvWE"
+/>
+`;
