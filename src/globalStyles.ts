@@ -1,11 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
-import styledNormalize from 'styled-normalize';
 import { IS_TEST } from './constants';
 import theme from './theme';
 
 export const GlobalStyle = createGlobalStyle`
-    ${styledNormalize}
- 
     html {
         margin: 0;
         font-family: sans-serif;

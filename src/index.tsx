@@ -9,6 +9,7 @@ import * as ReactDOM from 'react-dom';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Normalize } from 'styled-normalize';
 import { client } from './apollo';
 import { ErrorBoundary, ErrorScreen } from './components';
 import { JWT_LOCAL_STORAGE_KEY } from './constants';
@@ -51,6 +52,7 @@ function isLoggedIn() {
 ReactDOM.render(
   <ErrorBoundary FallbackComponent={ErrorScreen}>
     <ApolloProvider client={client}>
+      <Normalize />
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
