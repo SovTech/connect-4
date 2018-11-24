@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component renders a Button correctly 1`] = `
+<button
+  className="sc-bdVaJa gXrLnl"
+  disabled={undefined}
+  onClick={[Function]}
+  title={undefined}
+>
+  Button Title
+</button>
+`;
+
+exports[`Button Component renders a disabled Button correctly 1`] = `
+<button
+  className="sc-bdVaJa gXrLnl"
+  disabled={true}
+  onClick={null}
+  title={undefined}
+>
+  Button Title
+</button>
+`;
+
+exports[`Button Component renders a loading Button correctly 1`] = `
+<button
+  className="sc-bdVaJa gXrLnl"
+  disabled={undefined}
+  onClick={null}
+  title={undefined}
+>
+  Loading...
+</button>
+`;

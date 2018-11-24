@@ -4,9 +4,9 @@ import * as React from 'react';
 import { AvatarInner, AvatarWrapper } from './styles';
 
 type Props = {
-  imageUrl: string | null;
+  imageUrl?: string;
   size: 30 | 40 | 50 | 80;
-  activeColor?: 'RED' | 'YELLOW' | undefined;
+  activeColor?: 'RED' | 'YELLOW';
 }
 
 const Avatar = (props: Props) => {

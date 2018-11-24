@@ -6,7 +6,7 @@ import { H3 } from '../HeaderText';
 import { CardInner, CardWrapper, PaddedContent, TitleWrapper } from './styles';
 
 type Props = {
-  children: any;
+  children?: any;
   style?: React.CSSProperties;
   date?: string;
   loading?: boolean;
@@ -24,8 +24,8 @@ export default (props: Props) => (
     <CardInner>
       {props.title
         ? <TitleWrapper>
-          {props.loading && props.titleLoader ? <div/> : <H3>{props.title}</H3>}
-          {props.date ? <TimeAgo date={props.date}/> : <div/>}
+          {props.loading && props.titleLoader ? <div /> : <H3>{props.title}</H3>}
+          {props.date ? <TimeAgo date={props.date} /> : <div />}
         </TitleWrapper>
         : null}
       {props.contentPadding ? <PaddedContent>{props.children}</PaddedContent> : props.children}

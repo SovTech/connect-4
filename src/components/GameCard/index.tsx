@@ -58,7 +58,7 @@ export default class GameCard extends React.Component<GameCardProps> {
                       imageUrl={
                         redPlayer
                           ? redPlayer.avatarUrl
-                          : null
+                          : undefined
                       }
                     />
                     {GameCard.renderPlayerName(redPlayer)}
@@ -76,7 +76,7 @@ export default class GameCard extends React.Component<GameCardProps> {
                       imageUrl={
                         yellowPlayer
                           ? yellowPlayer.avatarUrl
-                          : null
+                          : undefined
                       }
                     />
                     {GameCard.renderPlayerName(yellowPlayer)}

@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Component renders a Card correctly 1`] = `
+<div
+  className="sc-ifAKCX kiXPab"
+  style={undefined}
+>
+  <div
+    className="sc-EHOje cqsmXB"
+  >
+    <div
+      className="sc-gzVnrw hwiGRg"
+    >
+      <h3
+        className="sc-htpNat gLVzZr"
+      >
+        Card Title
+      </h3>
+      <div />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card Component renders a Card correctly when loading 1`] = `
+<div
+  className="sc-ifAKCX kiXPab"
+  style={undefined}
+>
+  <div
+    className="sc-EHOje cqsmXB"
+  >
+    <div
+      className="sc-gzVnrw hwiGRg"
+    >
+      <h3
+        className="sc-htpNat gLVzZr"
+      >
+        Card Title
+      </h3>
+      <div />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card Component renders a Card correctly when loading with a title loading indicator 1`] = `
+<div
+  className="sc-ifAKCX kiXPab"
+  style={undefined}
+>
+  <div
+    className="sc-EHOje cqsmXB"
+  >
+    <div
+      className="sc-gzVnrw hwiGRg"
+    >
+      <h3
+        className="sc-htpNat gLVzZr"
+      >
+        Card Title
+      </h3>
+      <div />
+    </div>
+    <div
+      className="sc-bZQynM gRvvsu"
+    />
+  </div>
+</div>
+`;
+
+exports[`Card Component renders a Card correctly with no title padding, content padding and a grey background 1`] = `
+<div
+  className="sc-ifAKCX kiXPab"
+  style={undefined}
+>
+  <div
+    className="sc-EHOje cqsmXB"
+  >
+    <div
+      className="sc-gzVnrw hwiGRg"
+    >
+      <h3
+        className="sc-htpNat gLVzZr"
+      >
+        Card Title
+      </h3>
+      <div />
+    </div>
+    <div
+      className="sc-bZQynM gRvvsu"
+    />
+  </div>
+</div>
+`;

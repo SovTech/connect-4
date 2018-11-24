@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a ErrorMessage correctly 1`] = `
+<div
+  className="sc-ifAKCX fVKAHz"
+>
+  <h2
+    className="sc-bwzfXH ErJNR"
+  >
+    Sommin went wrong 😭
+  </h2>
+  <h3
+    className="sc-htpNat gLVzZr"
+  >
+    Mayhaps refresh your browser
+  </h3>
+  <h3
+    className="sc-htpNat gLVzZr"
+  >
+    Mayhaps check your interwebs connection
+  </h3>
+</div>
+`;
