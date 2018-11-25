@@ -1,7 +1,9 @@
-import Board from './board';
+import { addPiece } from './board';
 import GAME_CONFIG from './config';
+import { didSomeoneWin } from './matches';
 
 export default {
-  Board,
+  didSomeoneWin,
+  addPiece,
   GAME_CONFIG
 };

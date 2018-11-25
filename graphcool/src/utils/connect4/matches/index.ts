@@ -6,6 +6,6 @@ import isVertical from './vertical';
  * Does this grid contain any matches?
  * @param {Array} grid    6x7 muldimentional array containing our grid
  */
-export function didSomeoneWin(grid: any[][]) {
+export function didSomeoneWin(grid: Grid): boolean {
   return isHorizontal(grid) || isVertical(grid) || isDiagonal(grid);
 }

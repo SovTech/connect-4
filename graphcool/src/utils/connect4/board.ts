@@ -4,7 +4,7 @@
  * @param {Number} columnIndex
  * @param {String} piece
  */
-export function addPiece(grid: any, columnIndex: number, piece: string) {
+export function addPiece(grid: any, columnIndex: number, piece: string): Grid {
   const column = grid[columnIndex];
   let cellIndex = -1;
 
@@ -20,11 +20,6 @@ export function addPiece(grid: any, columnIndex: number, piece: string) {
 
     // Adds piece to column cell
     column[cellIndex] = piece;
-
-    // Makes board inactive if somebody won
-    // if (this.didSomebodyWin()) {
-    //   this.isActive = false;
-    // }
   }
   return grid;
 }

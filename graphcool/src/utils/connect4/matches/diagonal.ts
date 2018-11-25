@@ -1,12 +1,12 @@
+import GAME_CONFIG from '../config';
+
 /**
  * Are there any diagonal matches?
  * @param  {Array}  grid Multidimensional array representing our grid
  * @return {Boolean}
  */
-import GAME_CONFIG from '../config';
-
-function isDiagonal(grid: any[]) {
-  return isTopRight(grid) || isTopLeft(grid);
+function isDiagonal(grid: Grid): boolean {
+  return checkMainDiagonal(grid) || checkCounterDiagonal(grid);
 }
 
 /**
@@ -15,49 +15,17 @@ function isDiagonal(grid: any[]) {
  *
  * @return {Boolean}
  */
-function isTopLeft(grid: any[]) {
-
-  let found;
-  let foundPiece;
-  let col;
-
-  // Here, we take successive diagonals, defined by the location of their
-  // "base", meaning the column where they meet the ground.
-  // The initial baseCol is a negative number, representing that the diagonal
-  // starts off the board. These diagonals intersect the board, nonetheless.
-  for (
-    let baseCol = GAME_CONFIG.matchesRequired - GAME_CONFIG.rows;
-    baseCol < GAME_CONFIG.columns - (GAME_CONFIG.matchesRequired - 1);
-    baseCol++
-  ) {
-
-    found = 0;
-    foundPiece = 0;
-    col = baseCol - 1; // Subtracting 1 to compensate for incrementing col at the beginning of the loop
-
-    // Here we work our way *UP* the current diagonal
-    for (let row = 0; row < GAME_CONFIG.rows; row++) {
-      col++;
-
-      // Ensure that the given column and row are on the board
-      if (col >= 0 && col < GAME_CONFIG.columns && row < GAME_CONFIG.rows) {
-
-        let piece = grid[col][row];
-
-        if (!piece) {
-          found = 0;
-        }
-
-        if (!!piece && (piece === foundPiece || !foundPiece) && (++found) === GAME_CONFIG.matchesRequired) {
-          return true;
-        }
-
-        foundPiece = piece;
-
+function checkMainDiagonal(grid: Grid): boolean {
+  for (let row = 0; row < GAME_CONFIG.rows - 3; row++) {
+    for (let col = 0; col < GAME_CONFIG.columns - 3; col++) {
+      let element = grid[row][col];
+      if (element == grid[row + 1][col + 1] &&
+        element == grid[row + 2][col + 2] &&
+        element == grid[row + 3][col + 3]) {
+        return true;
       }
     }
   }
-
   return false;
 }
 
@@ -67,49 +35,17 @@ function isTopLeft(grid: any[]) {
  *
  * @return {Boolean}
  */
-function isTopRight(grid: any[]) {
-
-  let found;
-  let foundPiece;
-  let col;
-
-  // Here, we take successive diagonals, defined by the location of their "base",
-  // meaning the column where they meet the ground.
-  // The initial baseCol is a negative number, representing that the diagonal starts off
-  // the board. These diagonals intersect the board, nonetheless.
-  for (
-    let baseCol = GAME_CONFIG.matchesRequired - GAME_CONFIG.rows;
-    baseCol < GAME_CONFIG.columns - (GAME_CONFIG.matchesRequired - 1);
-    baseCol++
-  ) {
-
-    found = 0;
-    foundPiece = 0;
-    col = baseCol - 1; // Subtracting 1 to compensate for incrementing col at the beginning of the loop
-
-    // Here we work our way *DOWN* the current diagonal
-    for (let row = GAME_CONFIG.rows - 1; row >= 0; row--) {
-      col++;
-
-      // Ensure that the given column and row are on the board
-      if (col >= 0 && col < GAME_CONFIG.columns && row < GAME_CONFIG.rows) {
-
-        let piece = grid[col][row];
-
-        if (!piece) {
-          found = 0;
-        }
-
-        if (!!piece && (piece === foundPiece || !foundPiece) && (++found) === GAME_CONFIG.matchesRequired) {
-          return true;
-        }
-
-        foundPiece = piece;
-
+function checkCounterDiagonal(grid: Grid): boolean {
+  for (let row = 0; row < grid.length - 3; row++) {
+    for (let col = 3; col < grid[row].length; col++) {
+      const element = grid[row][col];
+      if (element == grid[row + 1][col - 1] &&
+        element == grid[row + 2][col - 2] &&
+        element == grid[row + 3][col - 3]) {
+        return true;
       }
     }
   }
-
   return false;
 }
 

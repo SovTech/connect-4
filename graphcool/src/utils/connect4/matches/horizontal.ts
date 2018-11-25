@@ -1,15 +1,15 @@
+import GAME_CONFIG from '../config';
+
 /**
  * Are there any matches horizontally?
  * @param {Array} grid Multidimensional array containing the connect4 grid
  *
  * @return {Boolean}
  */
-import GAME_CONFIG from '../config';
-
-function isHorizontal(grid: any[]) {
+function isHorizontal(grid: Grid): boolean {
   // Which piece was found and how many
   let found = 0;
-  let foundPiece = 0;
+  let foundPiece;
 
   for (let x = 0; x < GAME_CONFIG.rows; x++) {
     for (let y = 0; y < GAME_CONFIG.columns; y++) {
@@ -24,6 +24,7 @@ function isHorizontal(grid: any[]) {
         continue;
       }
 
+      // If piece was not the same as the last piece
       if (piece !== foundPiece) {
         found = 1;
         foundPiece = piece;
@@ -40,7 +41,7 @@ function isHorizontal(grid: any[]) {
     }
   }
 
-  // nothing was found in the same row
+  // Nothing was found in the same row
   return false;
 }
 

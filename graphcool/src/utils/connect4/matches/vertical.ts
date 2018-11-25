@@ -1,14 +1,12 @@
 import GAME_CONFIG from '../config';
 
-export default isVertical;
-
 /**
  * Are there matches found vertically?
  * @return {Boolean}
  */
-function isVertical(grid: any[][]) {
+function isVertical(grid: Grid): boolean {
   let found = 0;
-  let foundPiece = 0;
+  let foundPiece;
 
   for (let column of grid) {
     for (let piece of column) {
@@ -36,6 +34,8 @@ function isVertical(grid: any[][]) {
     }
   }
 
-  // nothing was found in the same row
+  // Nothing was found in the same row
   return false;
 }
+
+export default isVertical;

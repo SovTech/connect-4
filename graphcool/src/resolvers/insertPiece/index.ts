@@ -1,8 +1,7 @@
 import { fromEvent, FunctionEvent } from 'graphcool-lib';
 import { GraphQLClient } from 'graphql-request';
 import { SideColor } from '../../../custom-typings/SideColor';
-import { addPiece } from '../../utils/connect4/board';
-import { didSomeoneWin } from '../../utils/connect4/matches';
+import Connect4 from '../../utils/connect4';
 
 interface EventData {
   gameId: string;
@@ -39,15 +38,13 @@ export default async (event: FunctionEvent<EventData>) => {
         return {error: 'Player is not in this game'};
       }
 
-      console.log('&&&&', selectedColor, nextPlayer);
-
       if (selectedColor !== nextPlayer) {
         return {error: 'Its not your turn'};
       }
 
-      const updatedGrid = addPiece(grid, column, nextPlayer);
-      const status = didSomeoneWin(updatedGrid) ? 'FINISHED' : 'IN_PROGRESS';
-      const winner = didSomeoneWin(updatedGrid) ? nextPlayer : null;
+      const updatedGrid = Connect4.addPiece(grid, column, nextPlayer);
+      const status = Connect4.didSomeoneWin(updatedGrid) ? 'FINISHED' : 'IN_PROGRESS';
+      const winner = Connect4.didSomeoneWin(updatedGrid) ? nextPlayer : null;
 
       return await updateGame(api, gameId, updatedGrid, status, getNextColor(nextPlayer), winner).then(async game => {
         return {
@@ -101,7 +98,7 @@ async function getGame(api: GraphQLClient, gameId: string): Promise<any> {
   return api.request<{ getGame: any }>(getGameQuery, queryVariables);
 }
 
-async function updateGame(api: GraphQLClient, gameId: string, grid: string, status: string, nextPlayer: SideColor, winner: SideColor): Promise<any> {
+async function updateGame(api: GraphQLClient, gameId: string, grid: Grid, status: string, nextPlayer: SideColor, winner: SideColor): Promise<any> {
   const queryVariables = {
     gameId,
     grid,
